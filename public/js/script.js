@@ -1,7 +1,19 @@
 // run the function
+let angka = 1
+if (document.getElementById("produk_table") != null) {
   loadData()
-  getDataApi()
+}
+  
 // end run the function
+
+$(document).on({
+  ajaxStart: function () {
+    document.getElementById("loading-modal").style.display= "block"
+  },
+  ajaxStop: function () {
+    document.getElementById("loading-modal").style.display = "none";
+  },
+})
 
 //function
   function getDataApi() {
@@ -9,8 +21,8 @@
       type: "POST",
       url: "https://recruitment.fastprint.co.id/tes/api_tes_programmer",
       data: {
-        username: "tesprogrammer120623C23",
-        password: "c8b0c5bcf0137f2a7c7a7441440a8150",
+        username: "tesprogrammer130623C10",
+        password: md5('bisacoding-13-06-23')
       },
       dataType: "json",
       success: function (response) {
@@ -45,7 +57,7 @@
       type: "GET",
       url: "/loaddata",
       success: function (response) {
-        let jsonData = JSON.parse(response)
+        let jsonData = response
         let table = ""
 
         if (jsonData.length == 0) {
@@ -83,36 +95,9 @@
         })
         $("#produk_table").html(table)
       },
-    })
-  }
-
-  function deleteData(id) {
-    $.ajax({
-      type: "POST",
-      url: "/deleteproduk",
-      data: {id: id},
-      success: function () {
-        loadData()
-        alert("berhasil dihapus")
+      error: function (e) { 
+        console.error(e);
       }
-    })
-  }
-  
-  function showdata(id) {
-    $.ajax({
-      type: "POST",
-      url: "/showproduk",
-      data: { id: id },
-      success: function (response) {
-        let data = JSON.parse(response)
-        // console.log(data.nama_produk)
-
-        $("#id_produk").val(data.id_produk)
-        $("#nama_produk").val(data.nama_produk)
-        $("#harga").val(data.harga)
-        $("#kategori").val(data.kategori)
-        $("#status").val(data.status)
-      },
     })
   }
 // end function
@@ -155,6 +140,11 @@
         if (response == '200') {
           loadData()
           alert("berhasil diupdate")
+        }
+
+        if (response == '400') {
+          loadData()
+          alert("Terdapat kesalahan validasi")
         }
       }
     });

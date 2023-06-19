@@ -85,7 +85,12 @@ class ProduksController extends BaseController
     public function delete()
     {
         $id = $this->request->getVar("id");
-        $this->produks->delete($id);
+        
+        try {
+            $this->produks->delete($id);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function show()
@@ -106,7 +111,7 @@ class ProduksController extends BaseController
     {
         $data = $this->produks->where('status','bisa dijual')->orderBy('id_produk', 'DESC')->findAll();
 
-        echo json_encode($data, true);
+        return $this->response->setJSON($data);
     }
 
 

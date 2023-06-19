@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?= base_url('/tailwind/output.css') ?>" rel="stylesheet">
+    
     <title>Tes Junior Programmer</title>
 </head>
 <body>
@@ -25,12 +26,17 @@
 
     <!-- Modal untuk update -->
     <?= $this->include('partials/updateModal') ?>
+
+    <!-- Modal untuk loading -->
+    <?= $this->include('partials/loadingmodal') ?>
     
     <script src="<?= base_url('\jquery\jquery.min.js') ?>"></script>
+    <script src="<?= base_url('\js\md5.min.js') ?>"></script>
     <script src="<?= base_url('\js\script.js') ?>"></script>
     <script src="<?= base_url('\js\flowbite.min.js') ?>"></script>
     <!-- jQuery Modal -->
     <script src="<?= base_url('\jquery\jquery_modal.js') ?>"></script>
+    
     <link rel="stylesheet" href="<?= base_url('\css\jquery_modal.min.css') ?>" />
 </body>
 </html>
